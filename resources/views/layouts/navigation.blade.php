@@ -10,10 +10,19 @@
                     </a>
                 </div>
 
+                <!-- Admin Dashboard Link -->
+                @if(Auth::user() && Auth::user()->role == 'admin') <!-- Adjust this condition based on your role management -->
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                        {{ __('Admin Only') }}
+                    </x-nav-link>
+                </div>
+                @endif
+
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Upload') }}
                     </x-nav-link>
                 </div>
                 
@@ -28,6 +37,13 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('action.list_buckets')" :active="request()->routeIs('action.list_buckets')">
                         {{ __('Buckets') }}
+                    </x-nav-link>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('action.report')" :active="request()->routeIs('action.report')">
+                        {{ __('Report') }}
                     </x-nav-link>
                 </div>
             </div>

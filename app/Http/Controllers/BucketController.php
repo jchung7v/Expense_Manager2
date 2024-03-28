@@ -12,13 +12,16 @@ class BucketController extends Controller
         return view('action.list_buckets', compact('buckets'));
     }
 
+    public function newBucket() {
+        return view('action.new_bucket');
+    }
+
     // Add a bucket
     public function addBucket(Request $request) {
         $bucket = new Bucket();
         $bucket->category = $request->category;
         $bucket->vendor = $request->vendor;
         $bucket->save();
-
         return redirect()->route('action.list_buckets')->with('success', 'Bucket added successfully!');
     }
 
@@ -34,7 +37,6 @@ class BucketController extends Controller
         $bucket->category = $request->category;
         $bucket->vendor = $request->vendor;
         $bucket->save();
-
         return redirect()->route('action.list_buckets')->with('success', 'Bucket updated successfully!');
     }
 
@@ -45,7 +47,6 @@ class BucketController extends Controller
             $bucket->delete();
             return redirect()->route('action.list_buckets')->with('success', 'Bucket deleted successfully!');
         }
-
         return redirect()->route('action.list_buckets')->with('error', 'Bucket not found!');
     }
 }

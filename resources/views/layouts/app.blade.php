@@ -32,5 +32,8 @@
                 {{ $slot }}
             </main>
         </div>
+        <div class="py-16 text-center text-sm text-black dark:text-white/70">
+            Made by Juan Chung and Ran Park
+        </div>
     </body>
 </html>
