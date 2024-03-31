@@ -1,14 +1,20 @@
 <x-app-layout>
+    @if (Session::has('message'))
+    <script>
+        alert("{{ Session::get('message') }}")
+    </script>
+    @endif
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Transaction List') }}
         </h2>
     </x-slot>
-    <div class="py-12">
+    <div class="pt-12 pb-5">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <a href="{{ route('action.new_transaction') }}" 
-            class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                Add New Transaction
+            <a href="{{ route('action.new_transaction') }}" class="inline-flex">
+                <x-primary-button>
+                    {{ __('Add New Transaction') }}
+                </x-primary-button>
             </a>
         </div>
     </div>
@@ -37,6 +43,7 @@
                                     <td class="border-b border-gray-300 py-2">{{ number_format((float)$transaction->balance, 2) }}</td>
                                     <td class="border-b border-gray-300 py-2">
                                         <a href="{{ route('action.get_transaction', $transaction->id) }}" class="text-blue-600">Update</a>
+                                        <span class="text-gray-500">|</span>
                                         <form action="{{ route('action.delete_transaction', $transaction->id) }}" method="post" class="inline" onsubmit="return confirmDelete()">
                                             @csrf
                                             @method('DELETE')

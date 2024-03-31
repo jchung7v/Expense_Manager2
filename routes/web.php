@@ -17,6 +17,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -28,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/action/get_transaction/{id}', [TransactionController::class, 'getTransactionById'])->name('action.get_transaction');
     Route::patch('/action/update_transaction/{id}', [TransactionController::class, 'updateTransaction'])->name('action.update_transaction');
     Route::delete('/action/delete_transaction/{id}', [TransactionController::class, 'deleteTransaction'])->name('action.delete_transaction');
+    Route::get('/action/get_last_balance', [TransactionController::class, 'getLastBalance'])->name('action.get_last_balance');
 
     Route::get('/action/list_buckets', [BucketController::class, 'getBuckets'])->name('action.list_buckets');
     Route::get('/action/new_bucket', [BucketController::class, 'newBucket'])->name('action.new_bucket');
@@ -44,6 +46,5 @@ Route::middleware(['auth','role:admin'])->group(function () {
     Route::get('/admin/dashboard',[AdminController::class,'getUsers'])->name('admin.dashboard');
     Route::patch('/admin/update_role/{id}',[AdminController::class,'updateRole'])->name('admin.update_role');
 });
-
 
 require __DIR__.'/auth.php';

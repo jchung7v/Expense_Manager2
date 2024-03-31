@@ -27,7 +27,7 @@ class AdminController extends Controller
             $user->save();
         }
     
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('admin.dashboard')->with('message', 'The role has been updated successfully!');
     }
 
 }

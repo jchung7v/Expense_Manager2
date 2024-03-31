@@ -22,7 +22,7 @@ class BucketController extends Controller
         $bucket->category = $request->category;
         $bucket->vendor = $request->vendor;
         $bucket->save();
-        return redirect()->route('action.list_buckets')->with('success', 'Bucket added successfully!');
+        return redirect()->route('action.list_buckets')->with('message', 'Bucket added successfully!');
     }
 
     // Get a bucket by ID
@@ -37,7 +37,7 @@ class BucketController extends Controller
         $bucket->category = $request->category;
         $bucket->vendor = $request->vendor;
         $bucket->save();
-        return redirect()->route('action.list_buckets')->with('success', 'Bucket updated successfully!');
+        return redirect()->route('action.list_buckets')->with('message', 'Bucket updated successfully!');
     }
 
     // Delete a bucket
@@ -45,8 +45,8 @@ class BucketController extends Controller
         $bucket = Bucket::find($id);
         if ($bucket) {
             $bucket->delete();
-            return redirect()->route('action.list_buckets')->with('success', 'Bucket deleted successfully!');
+            return redirect()->route('action.list_buckets')->with('message', 'Bucket deleted successfully!');
         }
-        return redirect()->route('action.list_buckets')->with('error', 'Bucket not found!');
+        return redirect()->route('action.list_buckets')->with('message', 'Bucket not found!');
     }
 }

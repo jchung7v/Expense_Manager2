@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class TransactionController extends Controller
 {
     public function getTransactions() {
-        $transactions = Transaction::orderBy('date', 'desc')->get();
+        $transactions = Transaction::orderBy('id', 'desc')->get();
         return view('action.list_transactions', compact('transactions'));
     }
 
@@ -20,13 +20,24 @@ class TransactionController extends Controller
         $transaction->vendor = $request->vendor;
         $transaction->withdraw = $request->withdraw;
         $transaction->deposit = $request->deposit;
-        $transaction->balance = $request->balance;
+        $transaction->balance = $this->calculateBalance($request->withdraw, $request->deposit);
         $transaction->save();
-        return redirect()->route('action.list_transactions')->with('success', 'Transaction added successfully!');
+        return redirect()->route('action.list_transactions')->with('message', 'Transaction added successfully!');
+    }
+
+    public function calculateBalance($withdraw, $deposit) {
+        $lastBalance = Transaction::orderBy('id', 'desc')->first()->balance;
+        return $lastBalance - $withdraw + $deposit;
+    }
+
+    public function getLastBalance() {
+        $lastBalance = Transaction::orderBy('id', 'desc')->first()->balance;
+        return $lastBalance;
     }
 
     public function newTransaction() {
-        return view('action.new_transaction');
+        $lastBalance = $this->getLastBalance();
+        return view('action.new_transaction', compact('lastBalance'));
     }
 
     // Get a Transaction by ID
@@ -42,9 +53,9 @@ class TransactionController extends Controller
         $transaction->vendor = $request->vendor;
         $transaction->withdraw = $request->withdraw;
         $transaction->deposit = $request->deposit;
-        $transaction->balance = $request->balance;
+        $transaction->balance = $this->calculateBalance($request->withdraw, $request->deposit);
         $transaction->save();
-        return redirect()->route('action.list_transactions')->with('success', 'Transaction updated successfully!');
+        return redirect()->route('action.list_transactions')->with('message', 'Transaction updated successfully!');
     }
 
     // Delete a Transaction
@@ -52,8 +63,8 @@ class TransactionController extends Controller
         $transaction = Transaction::find($id);
         if ($transaction) {
             $transaction->delete();
-            return redirect()->route('action.list_transactions')->with('success', 'Transaction deleted successfully!');
+            return redirect()->route('action.list_transactions')->with('message', 'Transaction deleted successfully!');
         }
-        return redirect()->route('action.list_transactions')->with('error', 'Transaction not found!');
+        return redirect()->route('action.list_transactions')->with('message', 'Transaction not found!');
     }
 }

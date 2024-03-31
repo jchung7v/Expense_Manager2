@@ -1,14 +1,20 @@
 <x-app-layout>
+    @if (Session::has('message'))
+    <script>
+        alert("{{ Session::get('message') }}")
+    </script>
+    @endif
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Bucket List') }}
         </h2>
     </x-slot>
-    <div class="py-12">
+    <div class="pt-12 pb-5">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <a href="{{ route('action.new_bucket') }}" 
-            class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                Add New Bucket
+            <a href="{{ route('action.new_bucket') }}" class="inline-flex">
+                <x-primary-button>
+                    {{ __('Add New Bucket') }}
+                </x-primary-button>
             </a>
         </div>
     </div>
@@ -31,6 +37,7 @@
                                     <td class="border-b border-gray-300 py-2">{{ $bucket->vendor }}</td>
                                     <td class="border-b border-gray-300 py-2">
                                         <a href="{{ route('action.get_bucket', $bucket->id) }}" class="text-blue-600">Update</a>
+                                        <span class="text-gray-500">|</span>
                                         <form action="{{ route('action.delete_bucket', $bucket->id) }}" method="post" class="inline" onsubmit="return confirmDelete()">
                                             @csrf
                                             @method('DELETE')

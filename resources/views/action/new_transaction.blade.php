@@ -12,11 +12,11 @@
                         @csrf
                         <div class="mb-4">
                             <label for="date" class="block text-gray-700 text-sm font-bold mb-2">Date</label>
-                            <input type="date" name="date" id="date" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <input type="date" name="date" id="date" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                         </div>
                         <div class="mb-4">
                             <label for="vendor" class="block text-gray-700 text-sm font-bold mb-2">Vendor</label>
-                            <input type="text" name="vendor" id="vendor" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <input type="text" name="vendor" id="vendor" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                         </div>
                         <div class="mb-4">
                             <label for="withdraw" class="block text-gray-700 text-sm font-bold mb-2">Withdraw</label>
@@ -27,8 +27,8 @@
                             <input type="text" step="0.01" name="deposit" id="deposit" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         </div>
                         <div class="mb-4">
-                            <label for="balance" class="block text-gray-700 text-sm font-bold mb-2">Balance</label>
-                            <input type="text" step="0.01" name="balance" id="balance" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <label for="balance" class="block text-gray-700 text-sm font-bold mb-2">Current Balance</label>
+                            <input type="text" step="0.01" name="balance" id="balance" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="{{ $lastBalance }}" readonly>
                         </div>
                         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                             Submit

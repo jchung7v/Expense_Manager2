@@ -12,20 +12,12 @@
                 @csrf
                 <label for="fileToUpload" class="form-label">Select file to upload: </label>
                 <input type="file" class="mt-5 block w-full text-md text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" name="fileToUpload" id="fileToUpload">
-                <button type="submit" name="submit" class="mt-5 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Upload Selected File
-                </button>
+                <br>
+                <x-primary-button>
+                    {{ __('Upload Selected File') }}
+                </x-primary-button>
             </form>
         </div>
     </div>
-
-
-    @if (session('success'))
-    <script>
-        window.onload = function() {
-            alert('{{ session('success') }}');
-        };
-    </script>
-    @endif
 
 </x-app-layout>

@@ -29,12 +29,11 @@ class ImportController extends Controller
             }
         }
 
-        return redirect()->route('action.list_transactions')->with('success', 'CSV data has been imported successfully!');
+        return redirect()->route('action.list_transactions')->with('message', 'CSV data has been imported successfully!');
     }
 
     private function insertTransaction($data)
     {
-        // Assuming $data[0] is date, $data[1] is vendor, $data[2] is withdraw, $data[3] is deposit, $data[4] is balance
         $transaction = new Transaction();
         $transaction->date = \Carbon\Carbon::createFromFormat('m/d/Y', $data[0])->format('Y-m-d');
         $transaction->vendor = $data[1];
